@@ -1,4 +1,4 @@
-name: Xcode - Build and Analyze
+name: Xcode - Build, Archive, and Export
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build and analyze iOS app
+    name: Build, Archive, and Export iOS app
     runs-on: macos-latest
 
     steps:
@@ -27,8 +27,31 @@ jobs:
           scheme: ${{ steps.set_default.outputs.default_scheme }}
         run: |
           cd /Users/runner/work/CashyClone/CashyClone/ios
-          xcodebuild -list -workspace "Runner.xcworkspace" | xcpretty && exit ${PIPESTATUS[0]}
           xcodebuild clean build analyze \
-            -workspace "project.xcworkspace" \
+            -workspace "Runner.xcworkspace" \
             -scheme "$scheme" \
             | xcpretty && exit ${PIPESTATUS[0]}
+
+      - name: Archive
+        run: |
+          cd /Users/runner/work/CashyClone/CashyClone/ios
+          xcodebuild archive \
+            -workspace "Runner.xcworkspace" \
+            -scheme "$scheme" \
+            -archivePath "build/Runner.xcarchive" \
+            | xcpretty && exit ${PIPESTATUS[0]}
+
+      - name: Export IPA
+        run: |
+          cd /Users/runner/work/CashyClone/CashyClone/ios
+          xcodebuild -exportArchive \
+            -archivePath "build/Runner.xcarchive" \
+            -exportOptionsPlist "exportOptions.plist" \
+            -exportPath "build" \
+            | xcpretty && exit ${PIPESTATUS[0]}
+
+      - name: Create Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: iOS App
+          path: /Users/runner/work/CashyClone/CashyClone/ios/build/Runner.ipa
