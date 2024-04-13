@@ -38,7 +38,7 @@ jobs:
         with:
           repository: shloppytop/CashyClone
           github-token: ${{ secrets.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 }}
-          path: /Users/runner/work/CashyClone/CashyClone/build/ios/iphoneos/
+          path: /ios
 
       - name: Display structure of downloaded files
         run: ls -R
