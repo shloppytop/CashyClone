@@ -1,5 +1,4 @@
-
-name: Xcode  Build and Analyze
+name: Xcode - Build and Analyze
 
 on:
   push:
@@ -27,6 +26,12 @@ jobs:
           scheme: ${{ 'default' }}
         run: |
           if [ $scheme = default ]; then scheme=$(cat default); fi
-          if [ -d "$workspace_file" ]; then filetype_parameter="workspace" && file_to_build="$workspace_file"; else filetype_parameter="project" && file_to_build="$scheme_file"; fi
+          if [ -d "$PWD/$workspace_file" ]; then
+            filetype_parameter="workspace"
+            file_to_build="$PWD/$workspace_file"
+          else
+            filetype_parameter="project"
+            file_to_build="$PWD/$scheme_file"
+          fi
           file_to_build=$(echo "$file_to_build" | awk '{$1=$1;print}')
           xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
