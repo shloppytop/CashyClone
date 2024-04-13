@@ -15,15 +15,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set Default Scheme
+      - name: Set $Scheme
         run: |
-         cd /Users/runner/work/CashyClone/CashyClone/ios/Runner.xcodeproj/xcshareddata/xcschemes
-         scheme=$(<Runner.xcscheme)
-         echo "Using scheme: $scheme"
+           scheme="/Users/runner/work/CashyClone/CashyClone/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
+           echo "Scheme Location: $scheme"
 
       - name: Build
         env:
-          scheme: ${{ steps.set_default.outputs.default_scheme }}
+          scheme: "$scheme"
         run: |
           cd /Users/runner/work/CashyClone/ios/Runner.xcworkspace/
           xcodebuild clean build analyze \
