@@ -36,7 +36,7 @@ jobs:
         run: |
           cd /Users/runner/work/CashyClone/CashyClone/ios
           xcodebuild archive \
-            -workspace "Runner.xcworkspace" \
+            -workspace "project.xcworkspace" \
             -scheme "$scheme" \
             -archivePath "build/Runner.xcarchive" \
             | xcpretty && exit ${PIPESTATUS[0]}
