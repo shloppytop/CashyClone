@@ -26,7 +26,7 @@ jobs:
         env:
           scheme: ${{ steps.set_default.outputs.default_scheme }}
         run: |
-          cd CashyClone/ios
+          cd /Users/runner/work/CashyClone/CashyClone/ios
           xcodebuild clean build analyze \
             -workspace "Runner.xcworkspace" \
             -scheme "$scheme" \
