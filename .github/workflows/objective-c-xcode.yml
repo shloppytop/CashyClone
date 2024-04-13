@@ -8,31 +8,26 @@ on:
 
 jobs:
   build:
-    name: Build and analyze default scheme using xcodebuild command
+    name: Build and analyze iOS app
     runs-on: macos-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Set Default Scheme
         run: |
-          cd ios/Runner.xcodeproj
-          scheme_file="xcshareddata/xcschemes/Runner.xcscheme"
-          workspace_file="project.xcworkspace"
-          default=$(basename "$scheme_file" .xcscheme)
+          cd /ios/Runner.xcodeproj/xcshareddata/xcschemes
+          default=$(basename "Runner.xcscheme" .xcscheme)
           echo $default | cat > default
           echo Using default scheme: $default
+
       - name: Build
         env:
           scheme: ${{ steps.set_default.outputs.default_scheme }}
         run: |
-          cd ios/Runner.xcodeproj
-          if [ -d "$PWD/$workspace_file" ]; then
-            filetype_parameter="workspace"
-            file_to_build="$PWD/$workspace_file/Contents.xcworkspacedata"
-          else
-            filetype_parameter="project"
-            file_to_build="$PWD/$scheme_file"
-          fi
-          file_to_build=$(echo "$file_to_build" | awk '{$1=$1;print}')
-          xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
+          cd CashyClone/ios
+          xcodebuild clean build analyze \
+            -workspace "Runner.xcworkspace" \
+            -scheme "$scheme" \
+            | xcpretty && exit ${PIPESTATUS[0]}
