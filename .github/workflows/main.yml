@@ -1,3 +1,5 @@
+Certainly! Here's the beautified version of the YAML script:
+
 name: Flutter iOS Deployment
 
 on:
@@ -11,18 +13,17 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: Build Flutter module from the source
+        script: |
+          flutter pub get
+          cd /ios
+          pod install
 
-      - name: Flutter Deployment
-        uses: jeanluc243/Flutter-Deployment@0.1
-        
-      - name: Install Dependencies
-        run: flutter pub get
-        
       - name: Cache Dependencies
         uses: actions/cache@v4.0.2
         with:
-          path: ~/.pub-cache      
-          
+          path: ~/.pub-cache
+
       - name: Build iOS App
         run: flutter build ios --release --no-codesign
 
@@ -48,7 +49,7 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 587
-          username: kthnxlol@gmail.com 
+          username: kthnxlol@gmail.com
           password: '@c1dr0cks'
           subject: "Build Artifacts"
           body: "The build artifacts are attached."
