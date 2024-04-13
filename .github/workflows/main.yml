@@ -42,6 +42,7 @@ jobs:
           server_port: 587
           username: kthnxlol@gmail.com
           password: '@c1dr0cks'
+          from: tootoo20490@gmail.com
           subject: "Build Artifacts"
           body: "The build artifacts are attached."
           attachments: |
