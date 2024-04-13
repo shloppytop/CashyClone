@@ -24,9 +24,10 @@ jobs:
       - name: Cache Dependencies
         uses: actions/cache@v4.0.2
         with:
-          path: ~/.pub-cache
-          key: flutter-pub-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
-
+          cd ../
+        run: mkdir -p /.pub-cache
+        path: ~/.pub-cache
+          
       - name: Build iOS App
         run: flutter build ios --release --no-codesign
 
@@ -36,21 +37,23 @@ jobs:
           cp -R build/ios/iphoneos/Runner.app $HOME/outputs/ipa/
           cd $HOME/outputs/ipa
           zip -r app.ipa Runner.app
+          
       - name: Cache Artifacts
         uses: actions/cache@v2
         with:
           path: $HOME/outputs/ipa
-          key: flutter-artifacts-${{ runner.os }}-${{ hashFiles('**/Runner.app') }}
 
-      - name: Cache
-        uses: actions/cache@v4.0.2
-        with:
-    # A list of files, directories, and wildcard patterns to cache and restore
-          path: $HOME/outputs/ipa/
-    # An explicit key for restoring and saving the cache
-          key: 542356654
-    # An optional boolean when enabled, allows windows runners to save or restore caches that can be restored or saved respectively on other platforms
-          enableCrossOsArchive: true
-          fail-on-cache-miss: true
-          save-always: true
-          
+              artifacts:
+          - build/ios/iphoneos/Runner.app
+          - $HOME/outputs/ipa
+          - /tmp/xcodebuild_logs/*.log
+          - flutter_drive.log
+          - build/ios/iphoneos
+
+      publishing: 
+      email:
+        recipients:
+          - realperkypimp@gmail.com
+        notify:
+          success: true
+          failure: false
