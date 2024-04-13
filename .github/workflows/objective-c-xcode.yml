@@ -15,12 +15,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set Default Scheme
-        run: |
-          cd /ios/Runner.xcodeproj/xcshareddata/xcschemes
-          default=$(basename "Runner.xcscheme" .xcscheme)
-          echo $default | cat > default
-          echo Using default scheme: $default
+- name: Set Default Scheme
+  run: |
+    cd /ios/Runner.xcodeproj/xcshareddata/xcschemes
+    default=$(basename Runner.xcscheme .xcscheme)
+    echo $default > default
+    echo "Using default scheme: $default"
 
       - name: Build
         env:
