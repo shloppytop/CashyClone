@@ -25,7 +25,7 @@ jobs:
           scheme: "$scheme"
         run: |
           ls
-          cd /ios
+          cd /Users/runner/work/CashyClone/CashyClone/ios/Runner.xcodeproj
           xcodebuild clean build analyze \
             -workspace "project.xcworkspacedata" \
             -scheme "$scheme" \
