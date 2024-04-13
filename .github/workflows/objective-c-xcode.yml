@@ -26,10 +26,10 @@ jobs:
         env:
           scheme: ${{ steps.set_default.outputs.default_scheme }}
         run: |
-          cd /Users/runner/work/CashyClone/CashyClone/ios/Runner.xcodeproj
+          cd /Users/runner/work/CashyClone/ios/Runner.xcworkspace/
           xcodebuild clean build analyze \
-            -workspace "project.xcworkspace" \
-            -scheme "default" \
+            -workspace "project.xcworkspacedata" \
+            -scheme "$default" \
             | xcpretty && exit ${PIPESTATUS[0]}
 
       - name: Archive
