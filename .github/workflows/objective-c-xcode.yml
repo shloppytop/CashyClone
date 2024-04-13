@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          path: 'ios/Runner.xcodeproj/project.xcworkspace'
       - name: Set Default Scheme
         run: |
           scheme_file="ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
@@ -28,7 +30,7 @@ jobs:
           if [ $scheme = default ]; then scheme=$(cat default); fi
           if [ -d "$PWD/$workspace_file" ]; then
             filetype_parameter="workspace"
-            file_to_build="$PWD/$workspace_file/contents.xcworkspacedata"
+            file_to_build="$PWD/$workspace_file/Contents.xcworkspacedata"
           else
             filetype_parameter="project"
             file_to_build="$PWD/$scheme_file"
