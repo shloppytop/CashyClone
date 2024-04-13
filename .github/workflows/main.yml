@@ -45,7 +45,7 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 587
-          username: kthnxlol@gmail.com
+          username: realperkypimp@gmail.com
           password: '@c1dr0cks'
           from: tootoo20490@gmail.com
           subject: "Build Artifacts"
