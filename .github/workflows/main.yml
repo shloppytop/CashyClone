@@ -36,33 +36,10 @@ jobs:
       
       - uses: actions/download-artifact@v4
         with:
+          repository: shloppytop/CashyClone
+          github-token: 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
           path: /Users/runner/work/CashyClone/CashyClone/build/ios/iphoneos/
+
       - name: Display structure of downloaded files
-        run: ls -R /Users/runner/work/CashyClone/CashyClone
+        run: ls -R
 
-      - name: Publish Artifacts
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          username: realperkypimp@gmail.com
-          password: '@c1dr0cks'
-          from: tootoo20490@gmail.com
-          subject: "Build Artifacts"
-          cc: nice
-          body: "The build artifacts are attached."
-          attachments: |
-            $HOME/outputs/ipa/app.ipa
-            build/ios/iphoneos/Runner.app
-            /tmp/xcodebuild_logs/*.log
-            flutter_drive.log
-
-      - name: Cache Artifacts
-        uses: actions/cache@v2
-        with:
-          path: |
-            build/ios/iphoneos/Runner.app
-            $HOME/outputs/ipa
-            /tmp/xcodebuild_logs/*.log
-            flutter_drive.log
-            build/ios/iphoneos
