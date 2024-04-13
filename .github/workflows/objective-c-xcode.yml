@@ -17,10 +17,9 @@ jobs:
 
       - name: Set Default Scheme
         run: |
-          cd /Users/runner/work/CashyClone/CashyClone/ios/Runner.xcodeproj/xcshareddata/xcschemes
-          default=$(Runner.xcscheme)
-          echo $default > default
-          echo "Using default scheme: $default"
+         cd /Users/runner/work/CashyClone/CashyClone/ios/Runner.xcodeproj/xcshareddata/xcschemes
+         scheme=$(<Runner.xcscheme)
+         echo "Using scheme: $scheme"
 
       - name: Build
         env:
@@ -29,7 +28,7 @@ jobs:
           cd /Users/runner/work/CashyClone/ios/Runner.xcworkspace/
           xcodebuild clean build analyze \
             -workspace "project.xcworkspacedata" \
-            -scheme "$default" \
+            -scheme "$scheme" \
             | xcpretty && exit ${PIPESTATUS[0]}
 
       - name: Archive
