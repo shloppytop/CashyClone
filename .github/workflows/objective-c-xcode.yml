@@ -28,6 +28,7 @@ jobs:
         run: |
           cd /Users/runner/work/CashyClone/CashyClone/ios/Runner.xcodeproj
           ls
+          xcodebuild -list -workspace "Runner.xcworkspace" | xcpretty && exit ${PIPESTATUS[0]}
           xcodebuild clean build analyze \
             -workspace "project.xcworkspace" \
             -scheme "$scheme" \
