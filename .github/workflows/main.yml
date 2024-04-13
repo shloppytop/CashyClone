@@ -37,7 +37,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           repository: shloppytop/CashyClone
-          github-token: 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
+          github-token: ${{ secrets.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 }}
           path: /Users/runner/work/CashyClone/CashyClone/build/ios/iphoneos/
 
       - name: Display structure of downloaded files
