@@ -11,16 +11,17 @@ jobs:
     name: Build, Archive, and Export iOS app
     runs-on: macos-latest
 
-      - name: Set $Scheme
+    steps:
+      - name: Set Scheme
         run: |
-           scheme="/Users/runner/work/CashyClone/CashyClone/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
-           echo "Scheme Location: $scheme"
-           cd /Users/runner/work/CashyClone/CashyClone/ios/
+          scheme="/Users/runner/work/CashyClone/CashyClone/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
+          echo "Scheme Location: $scheme"
+
       - name: Build
         env:
           scheme: "$scheme"
         run: |
-          ls
+          cd ~ ~
           cd /Users/runner/work/CashyClone/ios/Runner.xcodeproj/project.xcworkspace/
           xcodebuild clean build analyze \
             -workspace "contents.xcworkspacedata" \
