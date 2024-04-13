@@ -30,7 +30,7 @@ jobs:
           if [ $scheme = default ]; then scheme=$(cat default); fi
           if [ -d "$PWD/$workspace_file" ]; then
             filetype_parameter="workspace"
-            file_to_build="$workspace_file/contents.xcworkspacedata"
+            file_to_build="$PWD/$workspace_file"
           else
             filetype_parameter="project"
             file_to_build="$PWD/$scheme_file"
