@@ -44,6 +44,7 @@ jobs:
           password: '@c1dr0cks'
           from: tootoo20490@gmail.com
           subject: "Build Artifacts"
+          cc: nice
           body: "The build artifacts are attached."
           attachments: |
             $HOME/outputs/ipa/app.ipa
