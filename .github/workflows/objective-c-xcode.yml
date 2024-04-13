@@ -27,7 +27,6 @@ jobs:
           scheme: ${{ steps.set_default.outputs.default_scheme }}
         run: |
           cd /Users/runner/work/CashyClone/CashyClone/ios
-          ls
           xcodebuild -list -workspace "Runner.xcworkspace" | xcpretty && exit ${PIPESTATUS[0]}
           xcodebuild clean build analyze \
             -workspace "project.xcworkspace" \
