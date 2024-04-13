@@ -13,10 +13,10 @@ jobs:
     steps:
 
       - name: Flutter Deployment
-        uses: jeanluc243/Flutter-Deployment@0.1
+          uses: jeanluc243/Flutter-Deployment@0.1
         
       - name: Install Dependencies
-        run: flutter pub get
+          run: flutter pub get
         
       - name: Cache Dependencies
         uses: actions/cache@v4.0.2
