@@ -27,7 +27,7 @@ jobs:
             -workspace "contents.xcworkspacedata" \
             -scheme "$scheme" \
             | xcpretty && exit ${PIPESTATUS[0]}
-
+            ls
       - name: Archive
         run: |
           cd /ios
