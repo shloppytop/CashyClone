@@ -17,7 +17,12 @@ jobs:
 
       - name: Install Dependencies
         run: flutter pub get
-
+        
+      - name: Cache Dependencies
+        uses: actions/cache@v4.0.2
+        with:
+          path: ~/.pub-cache      
+          
       - name: Build iOS App
         run: flutter build ios --release --no-codesign
 
