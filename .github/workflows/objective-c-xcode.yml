@@ -13,24 +13,23 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          path: 'ios/Runner.xcodeproj/project.xcworkspace'
+        uses: actions/checkout@v3
       - name: Set Default Scheme
         run: |
-          scheme_file="ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
-          workspace_file="ios/Runner.xcodeproj/project.xcworkspace"
+          cd ios/Runner.xcodeproj
+          scheme_file="xcshareddata/xcschemes/Runner.xcscheme"
+          workspace_file="project.xcworkspace"
           default=$(basename "$scheme_file" .xcscheme)
           echo $default | cat > default
           echo Using default scheme: $default
       - name: Build
         env:
-          scheme: ${{ '$default' }}
+          scheme: ${{ steps.set_default.outputs.default_scheme }}
         run: |
-          if [ $scheme = default ]; then scheme=$(cat default); fi
-          if [ -d "ios/Runner.xcodeproj/project.xcworkspace" ]; then
+          cd ios/Runner.xcodeproj
+          if [ -d "$PWD/$workspace_file" ]; then
             filetype_parameter="workspace"
-            file_to_build="$workspace_file"
+            file_to_build="$PWD/$workspace_file/Contents.xcworkspacedata"
           else
             filetype_parameter="project"
             file_to_build="$PWD/$scheme_file"
