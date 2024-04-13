@@ -33,6 +33,7 @@ jobs:
           cp -R build/ios/iphoneos/Runner.app $HOME/outputs/ipa/
           cd $HOME/outputs/ipa
           zip -r app.ipa Runner.app
+          cp -R pwd /Users/runner/work/CashyClone/CashyClone/build/ios/iphoneos/Runner.app /Users/shloppytop/CashyClone/
       
       - uses: actions/download-artifact@v4
         with:
