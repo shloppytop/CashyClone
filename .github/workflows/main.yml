@@ -21,15 +21,11 @@ jobs:
         run: flutter pub get
 
       - name: Build iOS App
-        run: flutter build ios --release
-
-      - name: Archive iOS App
         run: flutter build ios --release --no-codesign
 
-      - name: Create IPA
+      - name: Create IPA and .app
         run: |
           mkdir -p $HOME/outputs/ipa
-          cp build/ios/iphoneos/Runner.app/Info.plist $HOME/outputs/ipa/
-          cp build/ios/iphoneos/Runner.app/Runner $HOME/outputs/ipa/
+          cp -R build/ios/iphoneos/Runner.app $HOME/outputs/ipa/
           cd $HOME/outputs/ipa
-          zip -r app.ipa Info.plist Runner
+          zip -r app.ipa Runner.app
