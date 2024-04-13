@@ -1,4 +1,3 @@
-
 name: Flutter iOS Deployment
 
 on:
@@ -12,22 +11,16 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Build Flutter module from the source
+      - name: Flutter Deployment
+        uses: jeanluc243/Flutter-Deployment@0.1
         script: |
           flutter pub get
           cd /ios
           pod install
 
-      - name: Cache Dependencies
-        uses: actions/cache@v4.0.2
-        with:
-          path: ~/.pub-cache
-
-      - name: Build iOS App
-        run: flutter build ios --release --no-codesign
-
       - name: Create IPA and .app
         run: |
+          flutter build ios --release --no-codesign
           mkdir -p $HOME/outputs/ipa
           cp -R build/ios/iphoneos/Runner.app $HOME/outputs/ipa/
           cd $HOME/outputs/ipa
