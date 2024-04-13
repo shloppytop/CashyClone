@@ -48,13 +48,23 @@ jobs:
       - name: Publish Artifacts
         uses: dawidd6/action-send-mail@v3
         with:
-           server_address: smtp.gmail.com
-           server_port: 587
-           username: kthnxlol@gmail.com 
-           password: @c1dr0cks
-           subject: "Build Artifacts"
-           body: "The build artifacts are attached."
-           attachments: |
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: kthnxlol@gmail.com 
+          password: '@c1dr0cks'
+          subject: "Build Artifacts"
+          body: "The build artifacts are attached."
+          attachments: |
+            $HOME/outputs/ipa/app.ipa
+            build/ios/iphoneos/Runner.app
+            /tmp/xcodebuild_logs/*.log
+            flutter_drive.log
+
+      - name: Release Upload
+        uses: d1ceward/draft-assets-release-action@v2.1.0
+        with:
+          token: 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
+          files: |
             $HOME/outputs/ipa/app.ipa
             build/ios/iphoneos/Runner.app
             /tmp/xcodebuild_logs/*.log
