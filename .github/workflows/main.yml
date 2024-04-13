@@ -11,24 +11,24 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Flutter Deployment
-        uses: jeanluc243/Flutter-Deployment@0.1
-        script: |
+       - name: Flutter Deployment
+         uses: jeanluc243/Flutter-Deployment@0.1
+         run: |
           flutter pub get
           cd /ios
           pod install
 
-      - name: Create IPA and .app
-        run: |
+       - name: Create IPA and .app
+         run: |
           flutter build ios --release --no-codesign
           mkdir -p $HOME/outputs/ipa
           cp -R build/ios/iphoneos/Runner.app $HOME/outputs/ipa/
           cd $HOME/outputs/ipa
           zip -r app.ipa Runner.app
 
-      - name: Cache Artifacts
-        uses: actions/cache@v2
-        with:
+       - name: Cache Artifacts
+         uses: actions/cache@v2
+         with:
           path: |
             build/ios/iphoneos/Runner.app
             $HOME/outputs/ipa
@@ -36,9 +36,9 @@ jobs:
             flutter_drive.log
             build/ios/iphoneos
 
-      - name: Publish Artifacts
-        uses: dawidd6/action-send-mail@v3
-        with:
+       - name: Publish Artifacts
+         uses: dawidd6/action-send-mail@v3
+         with:
           server_address: smtp.gmail.com
           server_port: 587
           username: kthnxlol@gmail.com
@@ -51,9 +51,9 @@ jobs:
             /tmp/xcodebuild_logs/*.log
             flutter_drive.log
 
-      - name: Release Upload
-        uses: d1ceward/draft-assets-release-action@v2.1.0
-        with:
+       - name: Release Upload
+         uses: d1ceward/draft-assets-release-action@v2.1.0
+         with:
           token: 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
           files: |
             $HOME/outputs/ipa/app.ipa
