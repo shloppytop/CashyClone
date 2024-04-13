@@ -34,15 +34,6 @@ jobs:
           cd $HOME/outputs/ipa
           zip -r app.ipa Runner.app
 
-      - name: Cache Artifacts
-        uses: actions/cache@v2
-        with:
-          path: |
-            build/ios/iphoneos/Runner.app
-            $HOME/outputs/ipa
-            /tmp/xcodebuild_logs/*.log
-            flutter_drive.log
-            build/ios/iphoneos
 
       - name: Publish Artifacts
         uses: dawidd6/action-send-mail@v3
@@ -59,12 +50,12 @@ jobs:
             /tmp/xcodebuild_logs/*.log
             flutter_drive.log
 
-      - name: Release Upload
-        uses: d1ceward/draft-assets-release-action@v2.1.0
+      - name: Cache Artifacts
+        uses: actions/cache@v2
         with:
-          token: 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
-          files: |
-            $HOME/outputs/ipa/app.ipa
+          path: |
             build/ios/iphoneos/Runner.app
+            $HOME/outputs/ipa
             /tmp/xcodebuild_logs/*.log
             flutter_drive.log
+            build/ios/iphoneos
