@@ -1,5 +1,4 @@
 workflows:
-sample-workflow:
 name: cashapp
 description: A new Flutter project.
 
