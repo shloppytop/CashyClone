@@ -19,7 +19,7 @@ jobs:
         run: |
            scheme="/Users/runner/work/CashyClone/CashyClone/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
            echo "Scheme Location: $scheme"
-
+           cd /Users/runner/work/CashyClone/CashyClone/ios/
       - name: Build
         env:
           scheme: "$scheme"
