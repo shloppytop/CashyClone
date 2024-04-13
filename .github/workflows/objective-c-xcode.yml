@@ -17,7 +17,7 @@ jobs:
       - name: Set Default Scheme
         run: |
           scheme_file="ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
-          workspace_file="ios/Runner.xcodeproj/project.xcworkspace"
+          workspace_file="ios/Runner.xcworkspace"
           default=$(basename "$scheme_file" .xcscheme)
           echo $default | cat > default
           echo Using default scheme: $default
