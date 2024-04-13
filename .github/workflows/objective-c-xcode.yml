@@ -28,7 +28,7 @@ jobs:
           scheme: ${{ 'default' }}
         run: |
           if [ $scheme = default ]; then scheme=$(cat default); fi
-          if [ -d "$PWD/$workspace_file" ]; then
+          if [ -d "ios/Runner.xcodeproj/project.xcworkspace" ]; then
             filetype_parameter="workspace"
             file_to_build="$workspace_file"
           else
