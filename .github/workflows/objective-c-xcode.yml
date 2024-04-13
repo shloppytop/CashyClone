@@ -17,7 +17,7 @@ jobs:
       - name: Set Default Scheme
         run: |
           scheme_file="ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme"
-          workspace_file="ios/Runner.xcworkspace"
+          workspace_file="ios/Runner.xcodeproj/project.xcworkspace"
           default=$(basename "$scheme_file" .xcscheme)
           echo $default | cat > default
           echo Using default scheme: $default
@@ -28,7 +28,7 @@ jobs:
           if [ $scheme = default ]; then scheme=$(cat default); fi
           if [ -d "$PWD/$workspace_file" ]; then
             filetype_parameter="workspace"
-            file_to_build="$PWD/$workspace_file"
+            file_to_build="$PWD/$workspace_file/contents.xcworkspacedata"
           else
             filetype_parameter="project"
             file_to_build="$PWD/$scheme_file"
