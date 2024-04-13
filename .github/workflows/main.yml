@@ -5,6 +5,7 @@ on:
     branches:
       - main
 
+
 jobs:
   build:
     name: Build and Deploy
@@ -29,3 +30,17 @@ jobs:
           cp -R build/ios/iphoneos/Runner.app $HOME/outputs/ipa/
           cd $HOME/outputs/ipa
           zip -r app.ipa Runner.app
+
+      - name: Save Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: iOS App
+          path: $HOME/outputs/ipa/app.ipa
+
+
+      - name: List repository artifacts
+        uses: dhiwakarK/listartifactsaction@v1.2
+        with:
+          token: GITHUB_TOKEN
+          owner: Shloppytop 
+          repo:  CashyClone
