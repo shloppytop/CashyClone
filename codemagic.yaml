@@ -1,3 +1,4 @@
+workflows:
 name: cashapp
 description: A new Flutter project.
 
