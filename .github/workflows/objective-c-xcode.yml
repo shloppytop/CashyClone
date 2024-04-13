@@ -17,7 +17,7 @@ jobs:
 
       - name: Set Default Scheme
         run: |
-          cd CashyClone/ios/Runner.xcodeproj/xcshareddata/xcschemes
+          cd /ios/Runner.xcodeproj/xcshareddata/xcschemes
           default=$(basename Runner.xcscheme .xcscheme)
           echo $default > default
           echo "Using default scheme: $default"
