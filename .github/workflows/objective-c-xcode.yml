@@ -25,7 +25,7 @@ jobs:
           echo Using default scheme: $default
       - name: Build
         env:
-          scheme: ${{ 'default' }}
+          scheme: ${{ '$default' }}
         run: |
           if [ $scheme = default ]; then scheme=$(cat default); fi
           if [ -d "ios/Runner.xcodeproj/project.xcworkspace" ]; then
