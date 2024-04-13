@@ -19,8 +19,7 @@ jobs:
 
       - name: Build
         run: |
-          cd ~ ~
-          cd /Users/runner/work/CashyClone/ios/Runner.xcodeproj/project.xcworkspace/
+          cd /ios/Runner.xcodeproj/project.xcworkspace/
           xcodebuild clean build analyze \
             -workspace "contents.xcworkspacedata" \
             -scheme "$scheme" \
